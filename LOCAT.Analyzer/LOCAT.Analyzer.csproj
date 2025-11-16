@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <IsRoslynComponent>true</IsRoslynComponent>
+
+        <PackageId>LOCAT</PackageId>
+        <Title>L.O.C.A.T.</Title>
+        <Authors>Liam Thompson</Authors>
+        <Description>Liam's Obsessive Code Analysis Tool.
+
+            An analyzer to satiate my OCD.</Description>
+
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        
+        <RootNamespace>LOCAT.Analyzer</RootNamespace>
+        <AssemblyName>LOCAT.Analyzer</AssemblyName>
+        
+        <Version>1.0.0</Version>
+        
+        <PackageProjectUrl>https://github.com/Liamth99/L.O.C.A.T.</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Liamth99/L.O.C.A.T.</RepositoryUrl>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="LICENSE" Pack="true" PackagePath=""/>
+        <None Include="Readme.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Update="Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+</Project>

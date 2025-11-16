@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LOCAT.Analyzer.Sample/LOCAT.Analyzer.Sample.csproj" />
+  <Project Path="LOCAT.Analyzer.Tests/LOCAT.Analyzer.Tests.csproj" />
+  <Project Path="LOCAT.Analyzer/LOCAT.Analyzer.csproj" />
+</Solution>

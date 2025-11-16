@@ -25,8 +25,6 @@
         <RootNamespace>LOCAT.Analyzer</RootNamespace>
         <AssemblyName>LOCAT.Analyzer</AssemblyName>
         
-        <Version>1.0.0</Version>
-        
         <PackageProjectUrl>https://github.com/Liamth99/LOCAT</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Liamth99/LOCAT</RepositoryUrl>
     </PropertyGroup>

@@ -4,6 +4,7 @@
         
         <TargetFramework>netstandard2.0</TargetFramework>
         <IsPackable>true</IsPackable>
+        <Deterministic>true</Deterministic>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
@@ -12,12 +13,13 @@
 
         <PackageId>LOCAT</PackageId>
         <Title>L.O.C.A.T.</Title>
+        <PackageTags>Roslyn,CodeAnalysis,Analyzer</PackageTags>
         <Authors>Liam Thompson</Authors>
         <Description>Liam's Obsessive Code Analysis Tool.
 
             An analyzer to satiate my OCD.</Description>
 
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
         <PackageReadmeFile>Readme.md</PackageReadmeFile>
         
         <RootNamespace>LOCAT.Analyzer</RootNamespace>
@@ -25,8 +27,8 @@
         
         <Version>1.0.0</Version>
         
-        <PackageProjectUrl>https://github.com/Liamth99/L.O.C.A.T.</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Liamth99/L.O.C.A.T.</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Liamth99/LOCAT</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Liamth99/LOCAT</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
@@ -44,8 +46,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="LICENSE" Pack="true" PackagePath=""/>
-        <None Include="Readme.md" Pack="true" PackagePath="\"/>
+        <None Include="../Readme.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     
     <ItemGroup>

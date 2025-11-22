@@ -157,5 +157,23 @@ namespace LOCAT.Analyzer {
                 return ResourceManager.GetString("LOCAT005Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment contains `{0}`. Address or create issue: `{1}`.
+        /// </summary>
+        internal static string LOCAT006MessageFormat {
+            get {
+                return ResourceManager.GetString("LOCAT006MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TODO Comments should be fixed, or be added as issues on the projects repo..
+        /// </summary>
+        internal static string LOCAT006Title {
+            get {
+                return ResourceManager.GetString("LOCAT006Title", resourceCulture);
+            }
+        }
     }
 }

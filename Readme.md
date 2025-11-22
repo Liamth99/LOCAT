@@ -15,6 +15,20 @@ Don't expect too many useful analyzers.
 | LOCAT004 | Style    | Info     |    ✓    | Use 'is' pattern for constant checks.                                     |
 | LOCAT005 | Naming   | Warning  |    ✓    | Async Method names should end with Async.                                 |
 
+### V1.1.0 release
+| Rule ID  | Category | Severity | Has Fix | Notes                                                                      |
+|----------|----------|----------|:-------:|----------------------------------------------------------------------------|
+| LOCAT006 | Design   | Warning  |         | TODO Comments should be fixed, or be added as issues on the projects repo. |
+
+Will also trigger on comments with fixme, bug or temp. Comments can be ignored by marking them with a tilde:
+```csharp
+    /* TODO: fix (caught by the analyzer) */
+    // TODO: fix (caught by the analyzer)
+    
+    /*~ TODO: fix (ignored) */
+    //~ TODO: fix (ignored)
+```
+
 ## How To?
 ### How to debug?
 - Use the [launchSettings.json](Properties/launchSettings.json) profile.

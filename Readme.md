@@ -18,7 +18,7 @@ Don't expect too many useful analyzers.
 ### V1.1.0 release
 | Rule ID  | Category | Severity | Has Fix | Notes                                                                      |
 |----------|----------|----------|:-------:|----------------------------------------------------------------------------|
-| LOCAT006 | Design   | Warning  |         | TODO Comments should be fixed, or be added as issues on the projects repo. |
+| LOCAT006 | Design   | Warning  |    ✓    | TODO Comments should be fixed, or be added as issues on the projects repo. |
 
 Will also trigger on comments with fixme, bug or temp. Comments can be ignored by marking them with a tilde:
 ```csharp
@@ -28,6 +28,8 @@ Will also trigger on comments with fixme, bug or temp. Comments can be ignored b
     /*~ TODO: fix (ignored) */
     //~ TODO: fix (ignored)
 ```
+
+Note: added code "fix" to supress the warning in v1.1.1
 
 ## How To?
 ### How to debug?

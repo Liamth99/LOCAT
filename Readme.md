@@ -29,7 +29,12 @@ Will also trigger on comments with fixme, bug or temp. Comments can be ignored b
     //~ TODO: fix (ignored)
 ```
 
-Note: added code "fix" to supress the warning in v1.1.1
+Note: added code "fix" to suppress the warning in v1.1.1
+
+### V1.2.0 release
+| Rule ID  | Category | Severity | Has Fix | Notes                                                |
+|----------|----------|----------|:-------:|------------------------------------------------------|
+| LOCAT007 | Usage    | Warning  |         | Possible incorrect use of null-conditional operator. |
 
 ## How To?
 ### How to debug?

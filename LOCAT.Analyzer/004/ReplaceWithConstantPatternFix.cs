@@ -21,7 +21,7 @@ public class ReplaceWithConstantPatternFix : CodeFixProvider
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var parseOptions = (CSharpParseOptions)context.Document.Project.ParseOptions;
+        var parseOptions = (CSharpParseOptions)context.Document.Project.ParseOptions!;
         if (parseOptions.LanguageVersion < LanguageVersion.CSharp9)
         {
             return; // Language feature requires C# 9+
@@ -33,7 +33,7 @@ public class ReplaceWithConstantPatternFix : CodeFixProvider
             return;
 
         var span = diagnostic.Location.SourceSpan;
-        var binary = root.FindToken(span.Start).Parent.AncestorsAndSelf()
+        var binary = root!.FindToken(span.Start).Parent!.AncestorsAndSelf()
                          .OfType<BinaryExpressionSyntax>().FirstOrDefault();
 
         if (binary is null)
@@ -45,8 +45,8 @@ public class ReplaceWithConstantPatternFix : CodeFixProvider
 
         var model = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
 
-        var leftIsConst  = UseConstantPatternAnalyzer.IsConstantExpression(binary.Left,  model, context.CancellationToken);
-        var rightIsConst = UseConstantPatternAnalyzer.IsConstantExpression(binary.Right, model, context.CancellationToken);
+        var leftIsConst  = UseConstantPatternAnalyzer.IsConstantExpression(binary.Left,  model!, context.CancellationToken);
+        var rightIsConst = UseConstantPatternAnalyzer.IsConstantExpression(binary.Right, model!, context.CancellationToken);
 
         // Must be exactly one constant
         if (leftIsConst == rightIsConst)

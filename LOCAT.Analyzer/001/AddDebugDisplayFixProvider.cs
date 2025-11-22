@@ -23,7 +23,7 @@ public class AddDebugDisplayFixProvider : CodeFixProvider
         var diagnostic = context.Diagnostics.First();
         var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-        var classDeclaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().First();
+        var classDeclaration = root!.FindToken(diagnosticSpan.Start).Parent!.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().First();
 
         context.RegisterCodeFix(
             CodeAction.Create(
@@ -65,7 +65,7 @@ public class AddDebugDisplayFixProvider : CodeFixProvider
 
         // Replace the old class declaration with the new one
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        var newRoot = root.ReplaceNode(classDeclaration, newClassDeclaration);
+        var newRoot = root!.ReplaceNode(classDeclaration, newClassDeclaration);
 
         return await AddUsingIfMissingAsync(document.WithSyntaxRoot(newRoot), cancellationToken);
     }
@@ -103,6 +103,6 @@ public class AddDebugDisplayFixProvider : CodeFixProvider
         var newCompilationUnit = compilationUnit?.AddUsings(newUsing);
 
         // Return a new document with the updated root
-        return document.WithSyntaxRoot(newCompilationUnit);
+        return document.WithSyntaxRoot(newCompilationUnit!);
     }
 }

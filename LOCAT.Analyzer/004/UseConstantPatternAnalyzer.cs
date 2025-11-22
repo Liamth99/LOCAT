@@ -12,8 +12,8 @@ public class UseConstantPatternAnalyzer : DiagnosticAnalyzer
 {
     public static readonly DiagnosticDescriptor Rule = new (
         "LOCAT004",
-        Resources.LOCAT004Title,
-        Resources.LOCAT004MessageFormat,
+        "Use 'is' pattern for constant checks",
+        "Consider using '{0} {2}' instead of '{1} {2}'",
         "Style",
         DiagnosticSeverity.Info,
         isEnabledByDefault: true,

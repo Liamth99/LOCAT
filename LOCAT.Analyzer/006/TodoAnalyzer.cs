@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -16,8 +15,8 @@ public class TodoAnalyzer : DiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = new (
         "LOCAT006",
-        Resources.LOCAT006Title,
-        Resources.LOCAT006MessageFormat,
+        "TODO Comments should be fixed, or be added as issues on the projects repo",
+        messageFormat: "Comment contains `{0}`. Address or create issue: `{1}`.",
         "Design",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true);

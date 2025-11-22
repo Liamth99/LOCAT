@@ -27,9 +27,9 @@ public class AddDebugDisplayFixProvider : CodeFixProvider
 
         context.RegisterCodeFix(
             CodeAction.Create(
-                Resources.LOCAT001CodeAction,
+                "Add Blank Debug Display",
                 c => AddDebuggerDisplayAsync(context.Document, classDeclaration, c),
-                equivalenceKey: Resources.LOCAT001Title),
+                equivalenceKey: "Missing Debug Display, should include data from members"),
             diagnostic);
     }
 

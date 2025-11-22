@@ -12,22 +12,22 @@ public class InvalidDebugDisplayAnalyzer : DiagnosticAnalyzer
 {
     private static readonly DiagnosticDescriptor Rule1 = new (
         "LOCAT002",
-        Resources.LOCAT002Title,
-        Resources.LOCAT002MessageFormat,
+        "Debug Display value is empty",
+        "Debug Displays Should not be empty",
         category: "Design",
         DiagnosticSeverity.Error,
         isEnabledByDefault: true,
-        description: Resources.LOCAT002MessageFormat
+        description: "Debug Displays Should not be empty."
     );
     
     private static readonly DiagnosticDescriptor Rule2 = new (
         "LOCAT003",
-        Resources.LOCAT003Title,
-        Resources.LOCAT003MessageFormat,
+        "Debug Display value should not be constant",
+        "Debug Displays Should contain member data",
         category: "Design",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: Resources.LOCAT003MessageFormat
+        description: "Debug Displays Should contain member data."
     );
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [Rule1, Rule2];

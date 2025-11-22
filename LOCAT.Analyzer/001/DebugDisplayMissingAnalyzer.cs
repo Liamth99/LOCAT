@@ -16,12 +16,12 @@ public class DebugDisplayMissingAnalyzer : DiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = new (
         "LOCAT001",
-        Resources.LOCAT001Title,
-        Resources.LOCAT001MessageFormat,
+        "Missing Debug Display, should include data from members",
+        "'{0}' should have a DebugDisplay",
         category: "Design",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: Resources.LOCAT001Description
+        description: "Classes with in model namespaces should have a DebugDisplay."
     );
     
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = [Rule];

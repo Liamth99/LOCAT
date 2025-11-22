@@ -12,12 +12,12 @@ public class AsyncNameAnalyzer : DiagnosticAnalyzer
 {
     private static readonly DiagnosticDescriptor AsyncRule = new DiagnosticDescriptor(
         "LOCAT005",
-        Resources.LOCAT005Title,
-        Resources.LOCAT005Title,
+        "Async Method names should end with Async",
+        "Async Method names should end with Async",
         "Naming",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: Resources.LOCAT005Title);
+        description: "Async Method names should end with Async.");
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [AsyncRule];
 

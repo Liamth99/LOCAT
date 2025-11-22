@@ -51,4 +51,10 @@
     <data name="LOCAT005Title" xml:space="preserve">
         <value>Async Method names should end with Async.</value>
     </data>
+    <data name="LOCAT006Title" xml:space="preserve">
+        <value>TODO Comments should be fixed, or be added as issues on the projects repo.</value>
+    </data>
+    <data name="LOCAT006MessageFormat" xml:space="preserve">
+        <value>Comment contains `{0}`. Address or create issue: `{1}`</value>
+    </data>
 </root>

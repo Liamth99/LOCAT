@@ -52,7 +52,7 @@ public class RestrictedVariableNameAnalyzer : DiagnosticAnalyzer
             var value = match.Groups["class"].Value;
 
             if(!match.Success ||
-               (!value.Equals(className) && !value.Equals("default")) ||
+               (!value.Equals(className, StringComparison.OrdinalIgnoreCase) && !value.Equals("default")) ||
                !config.TryGetValue(configOption, out var restRegex)
               )
                 continue;

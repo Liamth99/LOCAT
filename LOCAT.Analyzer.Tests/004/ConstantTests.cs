@@ -14,7 +14,7 @@ public class ConstantTests
 {
     private static readonly DiagnosticResult Expected =
         new DiagnosticResult("LOCAT004", DiagnosticSeverity.Info)
-           .WithMessageFormat("Consider using '{0} {2}' instead of '{1} {2}'.");
+           .WithMessageFormat("Consider using '{0} {2}' instead of '{1} {2}'");
 
     [Fact]
     public async Task Flags_Null_Comparison()

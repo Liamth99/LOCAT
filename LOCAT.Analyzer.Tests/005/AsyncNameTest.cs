@@ -14,7 +14,7 @@ public class AsyncNameTests
 {
     private static readonly DiagnosticResult Expected =
         new DiagnosticResult("LOCAT005", DiagnosticSeverity.Warning)
-           .WithMessage("Async Method names should end with Async.")
+           .WithMessage("Async Method names should end with Async")
            .WithLocation(0);
 
     [Fact]

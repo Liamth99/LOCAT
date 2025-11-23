@@ -23,7 +23,7 @@ public class DebugDisplayMissingTest
 
         var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay.")
+            .WithMessageFormat("'{0}' should have a DebugDisplay")
             .WithArguments("Class1");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
@@ -41,7 +41,7 @@ public class DebugDisplayMissingTest
 
         var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay.")
+            .WithMessageFormat("'{0}' should have a DebugDisplay")
             .WithArguments("Class1");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
@@ -61,7 +61,7 @@ public class DebugDisplayMissingTest
 
         var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay.")
+            .WithMessageFormat("'{0}' should have a DebugDisplay")
             .WithArguments("Class1");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
@@ -81,7 +81,7 @@ public class DebugDisplayMissingTest
 
         var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay.")
+            .WithMessageFormat("'{0}' should have a DebugDisplay")
             .WithArguments("Class1");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);

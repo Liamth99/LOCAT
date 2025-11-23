@@ -21,7 +21,7 @@ public class InvalidDebugDisplayAttributeTests
 
         var expected = new DiagnosticResult("LOCAT002", DiagnosticSeverity.Error)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should not be empty.");
+            .WithMessageFormat("Debug Displays Should not be empty");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
     }
@@ -35,7 +35,7 @@ public class InvalidDebugDisplayAttributeTests
 
         var expected = new DiagnosticResult("LOCAT002", DiagnosticSeverity.Error)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should not be empty.");
+            .WithMessageFormat("Debug Displays Should not be empty");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
     }
@@ -52,7 +52,7 @@ public class InvalidDebugDisplayAttributeTests
 
         var expected = new DiagnosticResult("LOCAT003", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should contain member data.");
+            .WithMessageFormat("Debug Displays Should contain member data");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
     }
@@ -69,7 +69,7 @@ public class InvalidDebugDisplayAttributeTests
 
         var expected = new DiagnosticResult("LOCAT003", DiagnosticSeverity.Warning)
             .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should contain member data.");
+            .WithMessageFormat("Debug Displays Should contain member data");
 
         await Verifier.VerifyAnalyzerAsync(text, expected);
     }

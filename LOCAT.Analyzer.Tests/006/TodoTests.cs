@@ -14,7 +14,7 @@ public class TodoTests
     {
         return new DiagnosticResult("LOCAT006", DiagnosticSeverity.Warning)
               .WithLocation(location)
-              .WithMessageFormat("Comment contains `{0}`. Address or create issue: `{1}`")
+              .WithMessageFormat("Comment contains `{0}`. Address or create issue: `{1}`.")
               .WithArguments(type ,content);
     }
 

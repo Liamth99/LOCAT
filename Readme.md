@@ -33,15 +33,33 @@ Note: added code "fix" to suppress the warning in v1.1.1
 
 Note: added the ability to configure the regex used to capture comments in v1.2.0 below is the default
 
-```
+``` ini
 [*.cs]
 dotnet_diagnostic.LOCAT006.todo_regex = \b(todo|fixme|bug|temp)\b
 ```
 
 ### V1.2.0 release
-| Rule ID  | Category | Severity | Has Fix | Notes                                                |
-|----------|----------|----------|:-------:|------------------------------------------------------|
-| LOCAT007 | Usage    | Warning  |         | Possible incorrect use of null-conditional operator. |
+| Rule ID  | Category | Severity | Has Fix | Notes                                                                |
+|----------|----------|----------|:-------:|----------------------------------------------------------------------|
+| LOCAT007 | Usage    | Warning  |         | Possible incorrect use of null-conditional operator.                 |
+| LOCAT008 | Naming   | Warning  |         | Variable name is not allowed according to the class’s naming policy. |
+
+LOCAT008 Uses the .editorconfig to set up class name restrictions. Leaving the class name as default will apply the 
+restriction to all classes, and the regex is case-sensitive by default. Below are some (not very useful) examples.
+
+``` ini
+[*.cs]
+dotnet_diagnostic.LOCAT008.<ClassName> = <regex pattern>
+
+# Only i, j and k for int ¯\(ツ)/¯
+dotnet_diagnostic.LOCAT008.Int32 = [ijk]$
+
+# Only lowercase for everything
+dotnet_diagnostic.LOCAT008.default = ^[a-z]+$ 
+
+# Restrict temporary variable names (case-insesitivie)
+dotnet_diagnostic.LOCAT008.default = (?i)^(temp|tmp)$
+```
 
 ## How To?
 ### How to debug?

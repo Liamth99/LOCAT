@@ -42,7 +42,6 @@ dotnet_diagnostic.LOCAT006.todo_regex = \b(todo|fixme|bug|temp)\b
 | Rule ID  | Category | Severity | Has Fix | Notes                                                |
 |----------|----------|----------|:-------:|------------------------------------------------------|
 | LOCAT007 | Usage    | Warning  |         | Possible incorrect use of null-conditional operator. |
-| LOCAT008 | Usage    | Warning  |         | Possible incorrect use of null-conditional operator. |
 
 ## How To?
 ### How to debug?

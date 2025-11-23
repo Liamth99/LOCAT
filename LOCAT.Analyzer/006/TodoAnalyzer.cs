@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -11,8 +12,6 @@ namespace LOCAT.Analyzer._006;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TodoAnalyzer : DiagnosticAnalyzer
 {
-    private readonly Regex _todoRegex = new (@"\b(?<type>todo|fixme|bug|temp)\b", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
-
     private static readonly DiagnosticDescriptor Rule = new (
         "LOCAT006",
         "TODO Comments should be fixed, or be added as issues on the projects repo",
@@ -29,10 +28,16 @@ public class TodoAnalyzer : DiagnosticAnalyzer
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
-        context.RegisterSyntaxTreeAction(AnalyzeSyntaxTree);
+
+        context.RegisterCompilationStartAction(startContext =>
+        {
+            var config = startContext.Options.AnalyzerConfigOptionsProvider;
+
+            startContext.RegisterSyntaxTreeAction(c => AnalyzeSyntaxTree(c, config));
+        });
     }
 
-    private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context)
+    private void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context, AnalyzerConfigOptionsProvider config)
     {
         var root = context.Tree.GetRoot(context.CancellationToken);
 
@@ -44,7 +49,11 @@ public class TodoAnalyzer : DiagnosticAnalyzer
             if (!trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) && !trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
                 continue;
 
-            var match = _todoRegex.Match(trivia.ToString());
+            config.GetOptions(context.Tree).TryGetValue("dotnet_diagnostic.LOCAT006.todo_regex", out var configValue);
+
+            var todoRegex = new Regex(configValue ?? @"\b(todo|fixme|bug|temp)\b", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(500));
+
+            var match = todoRegex.Match(trivia.ToString());
 
             if (!match.Success)
                 continue;
@@ -65,7 +74,7 @@ public class TodoAnalyzer : DiagnosticAnalyzer
                 comment = comment.Substring(2, comment.Length - 4).Trim();
             }
 
-            var diagnostic = Diagnostic.Create(Rule, trivia.GetLocation(), match.Groups["type"], comment);
+            var diagnostic = Diagnostic.Create(Rule, trivia.GetLocation(), match.Groups[1], comment);
             context.ReportDiagnostic(diagnostic);
         }
     }

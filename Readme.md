@@ -31,6 +31,13 @@ Will also trigger on comments with fixme, bug or temp. Comments can be ignored b
 
 Note: added code "fix" to suppress the warning in v1.1.1
 
+Note: added the ability to configure the regex used to capture comments in v1.2.0 below is the default
+
+```
+[*.cs]
+dotnet_diagnostic.LOCAT006.todo_regex = \b(todo|fixme|bug|temp)\b
+```
+
 ### V1.2.0 release
 | Rule ID  | Category | Severity | Has Fix | Notes                                                |
 |----------|----------|----------|:-------:|------------------------------------------------------|

@@ -5,8 +5,9 @@ Essentially just an OCD analyzer to catch things I do, that I find annoying or w
 Don't expect too many useful analyzers.
 
 <p align="center">
-<img src="/icon.png" alt="Simple Icons" width=128>
+<img src="/icon1024.png" alt="Simple Icons" width=256>
 </p>
+
 # Rules
 
 ## V1.0.0 release
@@ -63,6 +64,11 @@ dotnet_diagnostic.LOCAT008.default = ^[a-z]+$
 # Restrict temporary variable names (case-insesitivie)
 dotnet_diagnostic.LOCAT008.default = (?i)^(temp|tmp)$
 ```
+
+## V1.3.0 release
+| Rule ID  | Category | Severity | Has Fix | Notes                                                       |
+|----------|----------|----------|:-------:|-------------------------------------------------------------|
+| LOCAT009 | Usage    | Info     |    ✓    | Optional parameters should be passed using named arguments. |
 
 # How To?
 ### How to debug?

@@ -4,6 +4,9 @@ Essentially just an OCD analyzer to catch things I do, that I find annoying or w
 
 Don't expect too many useful analyzers.
 
+<p align="center">
+<img src="/icon.png" alt="Simple Icons" width=128>
+</p>
 # Rules
 
 ## V1.0.0 release

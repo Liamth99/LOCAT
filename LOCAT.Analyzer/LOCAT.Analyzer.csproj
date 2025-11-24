@@ -23,6 +23,7 @@
 
         <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
         <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
         
         <RootNamespace>LOCAT.Analyzer</RootNamespace>
         <AssemblyName>LOCAT.Analyzer</AssemblyName>
@@ -47,6 +48,7 @@
 
     <ItemGroup>
         <None Include="../Readme.md" Pack="true" PackagePath="\"/>
+        <None Include="../icon.png" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>

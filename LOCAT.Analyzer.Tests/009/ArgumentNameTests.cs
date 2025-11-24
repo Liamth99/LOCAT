@@ -13,7 +13,7 @@ public class ArgumentNameTests
 {
     DiagnosticResult Expected(int location, string name)
     {
-        return new DiagnosticResult("LOCAT009", DiagnosticSeverity.Warning)
+        return new DiagnosticResult("LOCAT009", DiagnosticSeverity.Info)
               .WithLocation(location)
               .WithMessageFormat("The optional parameter ‘{0}’ is passed positionally. Use a named argument for clarity.")
               .WithArguments(name);

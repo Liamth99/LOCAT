@@ -14,7 +14,7 @@ public class OptionalParameterNamedArgumentAnalyzer : DiagnosticAnalyzer
         "Optional parameters should be passed using named arguments",
         messageFormat: "The optional parameter ‘{0}’ is passed positionally. Use a named argument for clarity.",
         "Usage",
-        DiagnosticSeverity.Warning,
+        DiagnosticSeverity.Info,
         isEnabledByDefault: true);
 
     /// <inheritdoc />

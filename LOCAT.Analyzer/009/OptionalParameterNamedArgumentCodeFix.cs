@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -26,21 +27,24 @@ public sealed class OptionalParameterNamedArgumentCodeFix : CodeFixProvider
         var diagnostic = context.Diagnostics[0];
         var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-        var argument = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<ArgumentSyntax>();
-        if (argument == null)
+        var node = root.FindNode(diagnosticSpan);
+        var argument = node.FirstAncestorOrSelf<ArgumentSyntax>();
+        var attributeArgument = node.FirstAncestorOrSelf<AttributeArgumentSyntax>();
+
+        if (argument == null && attributeArgument == null)
             return;
 
         context.RegisterCodeFix(
             CodeAction.Create(
                 "Use named argument",
-                c => AddNamedArgumentAsync(context.Document, argument, c),
+                c => AddNamedArgumentAsync(context.Document, node, c),
                 nameof(OptionalParameterNamedArgumentCodeFix)),
             diagnostic);
     }
 
     private static async Task<Document> AddNamedArgumentAsync(
         Document document,
-        ArgumentSyntax argumentSyntax,
+        SyntaxNode argumentNode,
         CancellationToken cancellationToken)
     {
         var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -48,25 +52,46 @@ public sealed class OptionalParameterNamedArgumentCodeFix : CodeFixProvider
         if (root == null || semanticModel == null)
             return document;
 
-        var argumentList = (ArgumentListSyntax)argumentSyntax.Parent!;
-        var invocation = (InvocationExpressionSyntax)argumentList.Parent!;
+        // Determine if we are dealing with a standard argument or an attribute argument
+        var (parentList, parentContainer) = argumentNode switch
+        {
+            ArgumentSyntax arg => (arg.Parent!, arg.Parent!.Parent!),
+            AttributeArgumentSyntax attrArg => (attrArg.Parent!, attrArg.Parent!.Parent!),
+            _ => (null, null)
+        };
 
-        var symbolInfo = ModelExtensions.GetSymbolInfo(semanticModel, invocation, cancellationToken);
+        if (parentContainer == null)
+            return document;
+
+        var symbolInfo = semanticModel.GetSymbolInfo(parentContainer, cancellationToken);
         if (symbolInfo.Symbol is not IMethodSymbol methodSymbol)
             return document;
 
-        var index = argumentList.Arguments.IndexOf(argumentSyntax);
+        var arguments = parentList switch
+        {
+            ArgumentListSyntax al => al.Arguments.Cast<SyntaxNode>().ToList(),
+            AttributeArgumentListSyntax aal => aal.Arguments.Cast<SyntaxNode>().ToList(),
+            _ => null
+        };
+
+        if (arguments == null)
+            return document;
+
+        var index = arguments.IndexOf(argumentNode);
         if (index < 0 || index >= methodSymbol.Parameters.Length)
             return document;
 
         var parameter = methodSymbol.Parameters[index];
+        var nameColon = SyntaxFactory.NameColon(parameter.Name);
 
-        var newArgument = argumentSyntax
-            .WithNameColon(SyntaxFactory.NameColon(parameter.Name))
-            .WithTriviaFrom(argumentSyntax);
+        var newNode = argumentNode switch
+        {
+            ArgumentSyntax arg => arg.WithNameColon(nameColon),
+            AttributeArgumentSyntax attrArg => attrArg.WithNameColon(nameColon),
+            _ => argumentNode
+        };
 
-        var newRoot = root.ReplaceNode(argumentSyntax, newArgument);
-
+        var newRoot = root.ReplaceNode(argumentNode, newNode.WithTriviaFrom(argumentNode));
         return document.WithSyntaxRoot(newRoot);
     }
 }

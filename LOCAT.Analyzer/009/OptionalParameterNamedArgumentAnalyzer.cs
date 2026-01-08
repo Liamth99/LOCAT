@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -27,6 +28,7 @@ public class OptionalParameterNamedArgumentAnalyzer : DiagnosticAnalyzer
         context.EnableConcurrentExecution();
 
         context.RegisterSyntaxNodeAction(AnalyzeInvocation, SyntaxKind.InvocationExpression);
+        context.RegisterSyntaxNodeAction(AnalyzeAttribute,  SyntaxKind.Attribute);
     }
 
     private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
@@ -34,25 +36,47 @@ public class OptionalParameterNamedArgumentAnalyzer : DiagnosticAnalyzer
         if (context.Node is not InvocationExpressionSyntax invocation)
             return;
 
-        var semanticModel = context.SemanticModel;
-
-        var symbolInfo = ModelExtensions.GetSymbolInfo(semanticModel, invocation, context.CancellationToken);
+        var symbolInfo = context.SemanticModel.GetSymbolInfo(invocation, context.CancellationToken);
         if (symbolInfo.Symbol is not IMethodSymbol methodSymbol)
             return;
 
-        var arguments = invocation.ArgumentList.Arguments;
-        if (arguments.Count is 0)
+        AnalyzeArguments(context, invocation.ArgumentList.Arguments, methodSymbol);
+    }
+
+    private static void AnalyzeAttribute(SyntaxNodeAnalysisContext context)
+    {
+        if (context.Node is not AttributeSyntax attribute)
+            return;
+
+        var symbolInfo = context.SemanticModel.GetSymbolInfo(attribute, context.CancellationToken);
+        if (symbolInfo.Symbol is not IMethodSymbol constructorSymbol)
+            return;
+
+        AnalyzeArguments(context, attribute.ArgumentList?.Arguments ?? default, constructorSymbol);
+    }
+
+    private static void AnalyzeArguments<T>(SyntaxNodeAnalysisContext context, SeparatedSyntaxList<T> arguments, IMethodSymbol methodSymbol) where T : SyntaxNode
+    {
+        if (arguments.Count == 0)
             return;
 
         for (int i = 0; i < arguments.Count; i++)
         {
             var arg = arguments[i];
 
-            if (arg.NameColon is not null)
+            // Check for name: value (standard) or name = value (attribute properties)
+            bool isNamed = arg switch
+            {
+                ArgumentSyntax a           => a.NameColon is not null,
+                AttributeArgumentSyntax aa => aa.NameColon is not null || aa.NameEquals is not null,
+                _                          => false
+            };
+
+            if (isNamed)
                 continue;
 
             if (i >= methodSymbol.Parameters.Length)
-                continue; // params or error cases
+                continue;
 
             var parameter = methodSymbol.Parameters[i];
 

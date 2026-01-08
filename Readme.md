@@ -70,6 +70,8 @@ dotnet_diagnostic.LOCAT008.default = (?i)^(temp|tmp)$
 |----------|----------|----------|:-------:|-------------------------------------------------------------|
 | LOCAT009 | Usage    | Info     |    ✓    | Optional parameters should be passed using named arguments. |
 
+Note: added attribute argument support in v1.3.1
+
 # How To?
 ### How to debug?
 - Use the [launchSettings.json](Properties/launchSettings.json) profile.

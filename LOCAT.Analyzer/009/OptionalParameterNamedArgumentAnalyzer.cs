@@ -91,43 +91,4 @@ public class OptionalParameterNamedArgumentAnalyzer : DiagnosticAnalyzer
             }
         }
     }
-
-    // private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
-    // {
-    //     if (context.Node is not InvocationExpressionSyntax invocation)
-    //         return;
-    //
-    //     var semanticModel = context.SemanticModel;
-    //
-    //     var symbolInfo = ModelExtensions.GetSymbolInfo(semanticModel, invocation, context.CancellationToken);
-    //     if (symbolInfo.Symbol is not IMethodSymbol methodSymbol)
-    //         return;
-    //
-    //     var arguments = invocation.ArgumentList.Arguments;
-    //     if (arguments.Count is 0)
-    //         return;
-    //
-    //     for (int i = 0; i < arguments.Count; i++)
-    //     {
-    //         var arg = arguments[i];
-    //
-    //         if (arg.NameColon is not null)
-    //             continue;
-    //
-    //         if (i >= methodSymbol.Parameters.Length)
-    //             continue; // params or error cases
-    //
-    //         var parameter = methodSymbol.Parameters[i];
-    //
-    //         if (parameter.IsOptional)
-    //         {
-    //             var diagnostic = Diagnostic.Create(
-    //                 Rule,
-    //                 arg.GetLocation(),
-    //                 parameter.Name);
-    //
-    //             context.ReportDiagnostic(diagnostic);
-    //         }
-    //     }
-    // }
 }

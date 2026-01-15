@@ -72,6 +72,13 @@ dotnet_diagnostic.LOCAT008.default = (?i)^(temp|tmp)$
 
 Note: added attribute argument support in v1.3.2
 
+## V1.4.0 release
+| Rule ID  | Category | Severity | Has Fix | Notes                                |
+|----------|----------|----------|:-------:|--------------------------------------|
+| LOCAT010 | Design   | Warning  |         | Do not use reserved exception types. |
+
+Based on suggestions from [Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/using-standard-exception-types)
+
 # How To?
 ### How to debug?
 - Use the [launchSettings.json](Properties/launchSettings.json) profile.

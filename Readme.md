@@ -14,7 +14,7 @@ Essentially just an OCD analyzer to catch things I do, that I find annoying or w
 If a rule annoys you, disable it by adding the following to your `.editorconfig`
 
 ``` ini
-[*.{cs,vb}]
+[*.cs]
 dotnet_diagnostic.<rule-ID>.severity = none
 ```
 
@@ -29,7 +29,7 @@ LOCAT is opinionated and incomplete. If you’re looking for broad analyzers, th
 
 # Installation
 
-LOCAT is distributed as a NuGet package.
+LOCAT is distributed as a [NuGet package](https://www.nuget.org/packages/LOCAT/).
 
 ## Via .NET CLI
 ```bash

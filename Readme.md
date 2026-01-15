@@ -1,12 +1,51 @@
 # LOCAT 
+![NuGet Version](https://img.shields.io/nuget/v/LOCAT.svg)
+![NuGet Downloads](https://img.shields.io/nuget/dt/LOCAT.svg)
+![GitHub Release](https://img.shields.io/github/v/release/Liamth99/LOCAT)
+![License](https://img.shields.io/github/license/Liamth99/LOCAT)
+
 ### (Liam's Obsessive Code Analysis Tool) 
 Essentially just an OCD analyzer to catch things I do, that I find annoying or want to ensure I avoid doing. 
-
-Don't expect too many useful analyzers.
 
 <p align="center">
 <img src="/icon1024.png" alt="Simple Icons" width=256>
 </p>
+
+If a rule annoys you, disable it by adding the following to your `.editorconfig`
+
+``` ini
+[*.{cs,vb}]
+dotnet_diagnostic.<rule-ID>.severity = none
+```
+
+## Other C# Analyzer Projects Worth Considering
+LOCAT is opinionated and incomplete. If you’re looking for broad analyzers, these projects are far better options:
+
+- [Meziantou.Analyzer](https://github.com/meziantou/Meziantou.Analyzer)
+- [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
+- [Roslynator](https://github.com/dotnet/roslynator)
+- [Sonar Analyzer for C# (SonarAnalyzer.CSharp)](https://github.com/SonarSource/sonar-dotnet)
+
+
+# Installation
+
+LOCAT is distributed as a NuGet package.
+
+## Via .NET CLI
+```bash
+dotnet add package LOCAT
+```
+
+## Via Visual Studio
+
+1. Right-click your project → Manage NuGet Packages
+
+2. Search for LOCAT
+
+3. Install the latest version
+
+Once installed, the analyzers will run automatically during builds and in the editor.
+No additional setup is required unless a rule supports configuration via `.editorconfig`.
 
 # Rules
 
@@ -79,10 +118,25 @@ Note: added attribute argument support in v1.3.2
 
 Based on suggestions from [Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/using-standard-exception-types)
 
-# How To?
+# Development & Debugging
 ### How to debug?
 - Use the [launchSettings.json](Properties/launchSettings.json) profile.
+- The sample project can be used to quickly test rules.
 - Debug tests.
 
-### Learn more about wiring analyzers
+### Learning more about analyzer development
 The complete set of information is available at [roslyn github repo wiki](https://github.com/dotnet/roslyn/blob/main/docs/wiki/README.md).
+
+# Contributing
+
+Contributions are welcome but not expected.
+
+If you have:
+- A suggestion for a new rule
+- An improvement to an existing analyzer
+- A small, focused PR
+
+feel free to open an issue or pull request.
+
+That said, LOCAT is primarily a personal project, and changes may be accepted, modified, or ignored
+depending on whether they align with the project’s goals. All rules must have test cases as well.

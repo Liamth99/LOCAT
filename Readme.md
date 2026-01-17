@@ -21,7 +21,7 @@ dotnet_diagnostic.<rule-ID>.severity = none
 ## Other C# Analyzer Projects Worth Considering
 LOCAT is opinionated and incomplete. If you’re looking for broad analyzers, these projects are far better options:
 
-- [Meziantou.Analyzer](https://github.com/meziantou/Meziantou.Analyzer)
+- [Meziantou.Analyzer](https://github.com/meziantou/Meziantou.Analyzer) (I've used this one in the past and it's what inspired me to create my own analyzers)
 - [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
 - [Roslynator](https://github.com/dotnet/roslynator)
 - [Sonar Analyzer for C# (SonarAnalyzer.CSharp)](https://github.com/SonarSource/sonar-dotnet)

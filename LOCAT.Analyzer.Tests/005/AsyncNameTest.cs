@@ -1,16 +1,12 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._005;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier =
-    Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
-        LOCAT.Analyzer._005.AsyncNameAnalyzer,
-        LOCAT.Analyzer._005.AsyncNameFix,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._005;
 
-public class AsyncNameTests
+public class AsyncNameTests : LocatVerifierBase<AsyncNameAnalyzer, AsyncNameFix>
 {
     private static readonly DiagnosticResult Expected =
         new DiagnosticResult("LOCAT005", DiagnosticSeverity.Warning)
@@ -31,7 +27,7 @@ public class Program
     }
 }";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
     
     [Fact]
@@ -53,7 +49,7 @@ public class TestClass
     }
 }";
 
-        await Verifier.VerifyAnalyzerAsync(text, Expected);
+        await VerifyAnalyzerAsync(text, [Expected]);
     }
 
     [Fact]
@@ -87,7 +83,8 @@ public class TestClass
 }
 ";
 
-        await Verifier.VerifyCodeFixAsync(testCode, Expected, fixedCode);
+
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected]);
     }
 
     [Fact]
@@ -131,6 +128,6 @@ public class TestClass2 : TestClass
 }
 ";
 
-        await Verifier.VerifyCodeFixAsync(testCode, Expected, fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected]);
     }
 }

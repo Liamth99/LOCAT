@@ -52,7 +52,7 @@ class C
 }
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "name")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "name")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
 }

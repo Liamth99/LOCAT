@@ -47,7 +47,7 @@ class C
 }}
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, shortName)]);
+        await VerifyAnalyzerAsync(text, [Expected(0, shortName)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Theory]
@@ -69,7 +69,7 @@ class C
 }}
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -91,6 +91,6 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 }

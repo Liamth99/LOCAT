@@ -26,7 +26,7 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -99,6 +99,6 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
                             }
                             ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 }

@@ -29,7 +29,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: fix this")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: fix this")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -45,7 +45,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: improve logic")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: improve logic")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: one"), Expected(1, "TODO", "TODO: two")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: one"), Expected(1, "TODO", "TODO: two")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -95,7 +95,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -111,7 +111,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -128,7 +128,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "FIXME", "FIXME: fix this"), Expected(1, "BUG", "BUG: handle edge case")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "FIXME", "FIXME: fix this"), Expected(1, "BUG", "BUG: handle edge case")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -144,7 +144,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: inline comment")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: inline comment")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -161,7 +161,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: first TODO: second")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: first TODO: second")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -177,7 +177,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -193,7 +193,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -212,7 +212,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -228,7 +228,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -245,7 +245,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "~ TODO: should be flagged")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "~ TODO: should be flagged")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -268,7 +268,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this"), Expected(1, "TODO", "TODO: but report this")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this"), Expected(1, "TODO", "TODO: but report this")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -284,7 +284,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -300,7 +300,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: flagged")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: flagged")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
         [Fact]
@@ -316,6 +316,6 @@ class C
 }
 ";
 
-            await VerifyAnalyzerAsync(text);
+            await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
         }
 }

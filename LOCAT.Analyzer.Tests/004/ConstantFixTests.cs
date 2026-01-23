@@ -29,7 +29,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "null")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "null")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "0")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "0")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -67,7 +67,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -86,7 +86,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is not", "!=", "5")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is not", "!=", "5")], cancellationToken: TestContext.Current.CancellationToken);
     }
     
     [Fact(Skip = "This test magically does work, but is technically compiled differently so it fails,")]
@@ -109,7 +109,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact(Skip = "This test magically does work, but is technically compiled differently so it fails,")]
@@ -130,7 +130,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "Max")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "Max")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact(Skip = "This test magically does work, but is technically compiled differently so it fails,")]
@@ -151,7 +151,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "42")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "42")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -170,7 +170,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "-5")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "-5")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact(Skip = "This test magically does work, but is technically compiled differently so it fails,")]
@@ -193,7 +193,7 @@ class C {
     }
 }";
 
-        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")]);
+        await VerifyCodeFixAsync(before, after, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
 }

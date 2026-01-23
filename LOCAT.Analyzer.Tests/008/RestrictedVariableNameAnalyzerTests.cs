@@ -31,7 +31,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -52,7 +52,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -67,7 +67,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -80,7 +80,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("p", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("p", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -93,7 +93,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("f", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("f", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -113,7 +113,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("n", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("n", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("i", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("i", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -154,7 +154,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("v", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("v", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -174,7 +174,8 @@ class C
         await VerifyAnalyzerAsync(
             text,
             [Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b"), Expected.WithLocation(1).WithArguments("b", "Int32", "\\b[a-z]\\b"), Expected.WithLocation(2).WithArguments("c", "Int32", "\\b[a-z]\\b")],
-            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
+            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b",
+            cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -191,7 +192,8 @@ class C
         await VerifyAnalyzerAsync(
             text,
             [Expected.WithLocation(1).WithArguments("Y", "Int32", "(?i)[xy]"), Expected.WithLocation(0).WithArguments("X", "Int32", "(?i)[xy]")],
-            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = (?i)[xy]");
+            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = (?i)[xy]",
+            cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -205,7 +207,7 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -219,6 +221,6 @@ class C
 }
 ";
 
-        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.Int32 = \\b[a-z]\\b");
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.Int32 = \\b[a-z]\\b", cancellationToken: TestContext.Current.CancellationToken);
     }
 }

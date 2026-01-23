@@ -1,12 +1,8 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._004;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier =
-    Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
-        LOCAT.Analyzer._004.UseConstantPatternAnalyzer,
-        LOCAT.Analyzer._004.ReplaceWithConstantPatternFix,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._004;
 
@@ -25,7 +21,8 @@ class C {
         if ({|#0:x == null|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "null"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "null")]);
     }
 
     [Fact]
@@ -37,7 +34,8 @@ class C {
         if ({|#0:x == 0|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "0"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "0")]);
     }
 
     [Fact]
@@ -49,7 +47,8 @@ class C {
         if ({|#0:x == ""test""|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "\"test\""));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")]);
     }
 
     [Fact]
@@ -61,7 +60,8 @@ class C {
         if ({|#0:x == 'c'|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "'c'"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "'c'")]);
     }
 
     [Fact]
@@ -73,7 +73,8 @@ class C {
         if ({|#0:x == true|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "true"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "true")]);
     }
 
     [Fact]
@@ -88,7 +89,8 @@ class C {
         Expression<Func<int, bool>> e = x => x == 0;
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test);
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test);
     }
 
     [Fact]
@@ -102,7 +104,8 @@ class C {
         if ({|#0:e == E.A|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "E.A"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")]);
     }
 
     [Fact]
@@ -115,7 +118,8 @@ class C {
         if ({|#0:x == Max|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "Max"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Max")]);
     }
 
     [Fact]
@@ -128,7 +132,8 @@ class C {
         if ({|#0:x == Y|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "Y"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Y")]);
     }
 
     [Fact]
@@ -140,7 +145,8 @@ class C {
         if ({|#0:x == -5|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "-5"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "-5")]);
     }
 
     [Fact]
@@ -154,6 +160,7 @@ class C {
         if ({|#0:c == N.Color.Blue|}) { }
     }
 }";
-        await Verifier.VerifyAnalyzerAsync(test, Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue"));
+
+        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")]);
     }
 }

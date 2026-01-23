@@ -66,7 +66,7 @@ public static class LocatVerifier<TAnalyzer, TCodeFixProvider>
         IEnumerable<Assembly>?         additionalReferences = null,
         string?                        editorConfigContent  = null,
         CancellationToken              cancellationToken    = default)
-        => await LocatVerifier<TAnalyzer>.VerifyAnalyzerAsync(source, expected, additionalReferences, editorConfigContent, cancellationToken);
+            => await LocatVerifier<TAnalyzer>.VerifyAnalyzerAsync(source, expected, additionalReferences, editorConfigContent, cancellationToken);
 
     /// <summary>
     /// Verifies that the provided source code produces the expected diagnostics and that the specified code fix resolves the diagnostics correctly.

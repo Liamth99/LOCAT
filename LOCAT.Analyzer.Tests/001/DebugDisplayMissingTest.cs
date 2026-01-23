@@ -1,16 +1,21 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._001;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier =
-    Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerVerifier<
-        LOCAT.Analyzer._001.DebugDisplayMissingAnalyzer,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._001;
 
 public class DebugDisplayMissingTest
 {
+    DiagnosticResult Expected(int location, string argument)
+    {
+        return new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
+              .WithLocation(location)
+              .WithMessageFormat("'{0}' should have a DebugDisplay")
+              .WithArguments(argument);
+    }
+
     [Fact]
     public async Task ClassWithNoDebugDisplayFileNamespace_AlertDiagnostic()
     {
@@ -21,12 +26,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay")
-            .WithArguments("Class1");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -39,12 +39,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay")
-            .WithArguments("Class1");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -59,12 +54,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay")
-            .WithArguments("Class1");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -79,12 +69,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        var expected = new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("'{0}' should have a DebugDisplay")
-            .WithArguments("Class1");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -99,7 +84,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -114,6 +99,6 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text);
     }
 }

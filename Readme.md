@@ -116,7 +116,14 @@ Note: added attribute argument support in v1.3.2
 |----------|----------|----------|:-------:|--------------------------------------|
 | LOCAT010 | Design   | Warning  |         | Do not use reserved exception types. |
 
-Based on suggestions from [Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/using-standard-exception-types)
+Based on suggestions from [Microsoft](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/using-standard-exception-types).
+
+## V1.5.0 release
+| Rule ID  | Category    | Severity | Has Fix | Notes                        |
+|----------|-------------|----------|:-------:|------------------------------|
+| LOCAT011 | Performance | Warning  |         | Regex missing match timeout. |
+
+Works on both Regex objects and attributes, warning is suppressed when using the NonBacktracking option flag.
 
 # Development & Debugging
 ### How to debug?

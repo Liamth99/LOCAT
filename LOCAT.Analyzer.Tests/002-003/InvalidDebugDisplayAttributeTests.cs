@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LOCAT.Analyzer.Tests._002_003;
 
-public class InvalidDebugDisplayAttributeTests
+public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugDisplayAnalyzer>
 {
     DiagnosticResult Expected2(int location)
     {
@@ -30,7 +30,7 @@ public class InvalidDebugDisplayAttributeTests
                             public class Class1{}
                             ";
 
-        await LocatVerifier<InvalidDebugDisplayAnalyzer>.VerifyAnalyzerAsync(text, [Expected2(0)]);
+        await VerifyAnalyzerAsync(text, [Expected2(0)]);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class InvalidDebugDisplayAttributeTests
                             [DebuggerDisplay({|#0:""     ""|#0})]
                             public class Class1{}";
 
-        await LocatVerifier<InvalidDebugDisplayAnalyzer>.VerifyAnalyzerAsync(text, [Expected2(0)]);
+        await VerifyAnalyzerAsync(text, [Expected2(0)]);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        await LocatVerifier<InvalidDebugDisplayAnalyzer>.VerifyAnalyzerAsync(text, [Expected3(0)]);
+        await VerifyAnalyzerAsync(text, [Expected3(0)]);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        await LocatVerifier<InvalidDebugDisplayAnalyzer>.VerifyAnalyzerAsync(text, [Expected3(0)]);
+        await VerifyAnalyzerAsync(text, [Expected3(0)]);
     }
 
     [Fact]
@@ -79,6 +79,6 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        await LocatVerifier<InvalidDebugDisplayAnalyzer>.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 }

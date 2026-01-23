@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LOCAT.Analyzer.Tests._001;
 
-public class DebugDisplayFixTests
+public class DebugDisplayFixTests: LocatVerifierBase<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>
 {
     DiagnosticResult Expected(int location, string argument)
     {
@@ -42,7 +42,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -109,7 +109,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -143,7 +143,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -183,7 +183,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass"), Expected(1, "TestClass2")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass"), Expected(1, "TestClass2")]);
     }
 
     [Fact]
@@ -224,7 +224,7 @@ namespace Company.Models
     }
 }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyCodeFixAsync(testCode, fixedCode, [Expected(1, "TestClass2")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(1, "TestClass2")]);
     }
 
     [Fact]
@@ -243,7 +243,7 @@ namespace Company.Models
             }
         }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyAnalyzerAsync(testCode);
+        await VerifyAnalyzerAsync(testCode);
     }
 
     [Fact]
@@ -259,6 +259,6 @@ namespace Company.Models
             }
         }";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>.VerifyAnalyzerAsync(testCode);
+        await VerifyAnalyzerAsync(testCode);
     }
 }

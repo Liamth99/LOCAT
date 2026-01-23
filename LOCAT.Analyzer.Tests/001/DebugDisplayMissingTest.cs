@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LOCAT.Analyzer.Tests._001;
 
-public class DebugDisplayMissingTest
+public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnalyzer>
 {
     DiagnosticResult Expected(int location, string argument)
     {
@@ -26,7 +26,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
+        await VerifyAnalyzerAsync(text, [Expected(0, "Class1")]);
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -99,6 +99,6 @@ public class DebugDisplayMissingTest
                             }
                             ";
 
-        await LocatVerifier<DebugDisplayMissingAnalyzer>.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 }

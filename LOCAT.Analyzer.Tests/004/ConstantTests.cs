@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LOCAT.Analyzer.Tests._004;
 
-public class ConstantTests
+public class ConstantTests : LocatVerifierBase<UseConstantPatternAnalyzer>
 {
     private static readonly DiagnosticResult Expected =
         new DiagnosticResult("LOCAT004", DiagnosticSeverity.Info)
@@ -22,7 +22,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "null")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "null")]);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "0")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "0")]);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")]);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "'c'")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "'c'")]);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "true")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "true")]);
     }
 
     [Fact]
@@ -90,7 +90,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test);
+        await VerifyAnalyzerAsync(test);
     }
 
     [Fact]
@@ -105,7 +105,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")]);
     }
 
     [Fact]
@@ -119,7 +119,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Max")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Max")]);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Y")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Y")]);
     }
 
     [Fact]
@@ -146,7 +146,7 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "-5")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "-5")]);
     }
 
     [Fact]
@@ -161,6 +161,6 @@ class C {
     }
 }";
 
-        await LocatVerifier<UseConstantPatternAnalyzer>.VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")]);
     }
 }

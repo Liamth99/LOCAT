@@ -12,10 +12,12 @@ using Microsoft.CodeAnalysis.Testing;
 namespace LOCAT.Analyzer.Tests;
 
 /// <summary>
-/// A static helper class to verify the behavior of diagnostics analyzers in tests.
+/// Provides utility methods for verifying diagnostics produced by Roslyn analyzers during unit testing.
 /// </summary>
-/// <typeparam name="TAnalyzer">The type of the diagnostic analyzer to verify. Must inherit from <see cref="DiagnosticAnalyzer"/>.</typeparam>
-public static class LocatVerifier<TAnalyzer> where TAnalyzer : DiagnosticAnalyzer, new()
+/// <typeparam name="TAnalyzer">
+/// The type of analyzer to test. Must derive from <see cref="DiagnosticAnalyzer"/> and have a parameterless constructor.
+/// </typeparam>
+public abstract class LocatVerifierBase<TAnalyzer> where TAnalyzer : DiagnosticAnalyzer, new()
 {
     /// <summary>
     /// Verifies the diagnostics produced by the provided analyzer on the given source code.
@@ -25,7 +27,7 @@ public static class LocatVerifier<TAnalyzer> where TAnalyzer : DiagnosticAnalyze
     /// <param name="additionalReferences">A collection of additional assembly references to include in the analysis. Can be null if no additional references are needed.</param>
     /// <param name="editorConfigContent">The content of an editor configuration file to use during the analysis. Can be null if no configuration is needed.</param>
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
-    public static async Task VerifyAnalyzerAsync(
+    public async Task VerifyAnalyzerAsync(
         string                         source,
         IEnumerable<DiagnosticResult>? expected             = null,
         IEnumerable<Assembly>?         additionalReferences = null,
@@ -52,22 +54,19 @@ public static class LocatVerifier<TAnalyzer> where TAnalyzer : DiagnosticAnalyze
 }
 
 /// <summary>
-/// A static helper class to verify the behavior of diagnostics analyzers in tests.
+/// Provides a framework for unit testing Roslyn analyzers and code fixes.
+/// This class allows verification of diagnostics and fixes produced by a specific analyzer and code fix provider.
 /// </summary>
-/// <typeparam name="TAnalyzer">The type of the diagnostic analyzer to verify. Must inherit from <see cref="DiagnosticAnalyzer"/>.</typeparam>
-/// <typeparam name="TCodeFixProvider">The type of the code fix provider to apply fixes. Must inherit from <see cref="CodeFixProvider"/>.</typeparam>
-public static class LocatVerifier<TAnalyzer, TCodeFixProvider>
+/// <typeparam name="TAnalyzer">
+/// The type of the diagnostic analyzer to test. Must derive from <see cref="DiagnosticAnalyzer"/> and have a parameterless constructor.
+/// </typeparam>
+/// <typeparam name="TCodeFixProvider">
+/// The type of the code fix provider to test. Must derive from <see cref="CodeFixProvider"/> and have a parameterless constructor.
+/// </typeparam>
+public abstract class LocatVerifierBase<TAnalyzer, TCodeFixProvider> : LocatVerifierBase<TAnalyzer>
     where TAnalyzer : DiagnosticAnalyzer, new()
     where TCodeFixProvider  : CodeFixProvider,    new()
 {
-    public static async Task VerifyAnalyzerAsync(
-        string                         source,
-        IEnumerable<DiagnosticResult>? expected             = null,
-        IEnumerable<Assembly>?         additionalReferences = null,
-        string?                        editorConfigContent  = null,
-        CancellationToken              cancellationToken    = default)
-            => await LocatVerifier<TAnalyzer>.VerifyAnalyzerAsync(source, expected, additionalReferences, editorConfigContent, cancellationToken);
-
     /// <summary>
     /// Verifies that the provided source code produces the expected diagnostics and that the specified code fix resolves the diagnostics correctly.
     /// </summary>

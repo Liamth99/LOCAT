@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Build
-        run: dotnet build --configuration
+        run: dotnet build
 
       - name: Test
-        run: dotnet test --configuration --no-build
+        run: dotnet test --no-build

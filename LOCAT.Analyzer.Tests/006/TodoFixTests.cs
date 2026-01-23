@@ -1,15 +1,12 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._006;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
-        LOCAT.Analyzer._006.TodoAnalyzer,
-        LOCAT.Analyzer._006.SuppressTodoFix,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._006;
 
-public class TodoFixTests
+public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 {
     DiagnosticResult Expected(int location, string type, string content)
     {
@@ -30,10 +27,7 @@ public class TodoFixTests
 //~ TODO: fix this
 ";
 
-        await Verifier.VerifyCodeFixAsync(
-            text,
-            Expected(0, "TODO", "TODO: fix this"),
-            fix);
+        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: fix this")]);
     }
 
     [Fact]
@@ -47,10 +41,7 @@ public class TodoFixTests
 /*~ TODO: improve logic */
 ";
 
-        await Verifier.VerifyCodeFixAsync(
-            text,
-            Expected(0, "TODO", "TODO: improve logic"),
-            fix);
+        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: improve logic")]);
     }
 
     [Fact]
@@ -60,7 +51,7 @@ public class TodoFixTests
 //~ TODO: already ignored
 ";
 
-            await Verifier.VerifyAnalyzerAsync(text);
+            await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -74,10 +65,7 @@ public class TodoFixTests
 //~ fixme: handle error
 ";
 
-            await Verifier.VerifyCodeFixAsync(
-                    text,
-                    Expected(0, "fixme", "fixme: handle error"),
-                    fix);
+            await VerifyCodeFixAsync(text, fix, [Expected(0, "fixme", "fixme: handle error")]);
     }
 
     [Fact]
@@ -91,9 +79,6 @@ public class TodoFixTests
 /*~ bug: issue here */
 ";
 
-            await Verifier.VerifyCodeFixAsync(
-                    text,
-                    Expected(0, "bug", "bug: issue here"),
-                    fix);
+            await VerifyCodeFixAsync(text, fix, [Expected(0, "bug", "bug: issue here")]);
     }
 }

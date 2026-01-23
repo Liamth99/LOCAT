@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._007;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
@@ -8,7 +9,7 @@ using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerVerifier<
 
 namespace LOCAT.Analyzer.Tests._007;
 
-public class NullConditionalTests
+public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
 {
     DiagnosticResult Expected(int location)
     {
@@ -33,7 +34,8 @@ public class NullConditionalTests
             var a = t{|#0:?|}.GetConstructors();
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text, Expected(0));
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
     [Fact]
@@ -48,7 +50,8 @@ public class NullConditionalTests
             var b = t{|#0:?|}.Assembly;
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text, Expected(0));
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
     [Fact]
@@ -63,7 +66,8 @@ public class NullConditionalTests
             var c = i{|#0:?|}[0];
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text, Expected(0));
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
     // ===================================================================
@@ -82,7 +86,8 @@ public class NullConditionalTests
             var a = t?.GetConstructors();
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -98,6 +103,8 @@ public class NullConditionalTests
         }
     }";
         await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -112,7 +119,8 @@ public class NullConditionalTests
             var c = i?[0];
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     // ===================================================================
@@ -131,7 +139,8 @@ public class NullConditionalTests
             var a = t.GetConstructors();
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -147,6 +156,8 @@ public class NullConditionalTests
         }
     }";
         await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -161,7 +172,8 @@ public class NullConditionalTests
             var c = i[0];
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     // ===================================================================
@@ -181,7 +193,8 @@ public class NullConditionalTests
             var a = local?.GetConstructors();
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -196,7 +209,8 @@ public class NullConditionalTests
             var a = i?[0];
         }
     }";
-        await Verifier.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
 

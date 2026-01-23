@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LOCAT.Analyzer.Tests._011;
 
-public class RegexTimeoutTests
+public class RegexTimeoutTests : LocatVerifierBase<RegexTimeoutAnalyzer>
 {
     DiagnosticResult Expected(int location)
     {
@@ -28,7 +28,8 @@ class C
         var r = {|#0:new Regex(""abc"")|};
     }
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0)]);
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
     [Fact]
@@ -45,7 +46,8 @@ class C
         var r = new Regex(""abc"", RegexOptions.None, TimeSpan.FromSeconds(1));
     }
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -61,7 +63,8 @@ class C
         var r = new Regex(""abc"", RegexOptions.NonBacktracking);
     }
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -77,7 +80,8 @@ class C
         var r = new Regex(""abc"", RegexOptions.IgnoreCase | RegexOptions.NonBacktracking);
     }
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text, []);
+
+        await VerifyAnalyzerAsync(text, []);
     }
 
     [Fact]
@@ -92,7 +96,8 @@ partial class C
     private static partial Regex R();
     private static partial Regex R() => null!;
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0)]);
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
     [Fact]
@@ -108,7 +113,8 @@ partial class C
     private static partial Regex R();
     private static partial Regex R() => null!;
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -123,7 +129,8 @@ partial class C
     private static partial Regex R();
     private static partial Regex R() => null!;
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text);
+
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -139,7 +146,8 @@ class C
         var r = {|#0:new Regex(""abc"", opts)|};
     }
 }";
-        await LocatVerifier<RegexTimeoutAnalyzer>.VerifyAnalyzerAsync(text, [Expected(0)]);
+
+        await VerifyAnalyzerAsync(text, [Expected(0)]);
     }
 
 }

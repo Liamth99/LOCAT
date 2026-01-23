@@ -1,14 +1,12 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._006;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerVerifier<
-        LOCAT.Analyzer._006.TodoAnalyzer,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._006;
 
-public class TodoTests
+public class TodoTests : LocatVerifierBase<TodoAnalyzer>
 {
     DiagnosticResult Expected(int location, string type, string content)
     {
@@ -31,9 +29,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: fix this"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: fix this")]);
     }
 
     [Fact]
@@ -49,9 +45,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: improve logic"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: improve logic")]);
     }
 
     [Fact]
@@ -68,10 +62,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: one"),
-            Expected(1, "TODO", "TODO: two"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: one"), Expected(1, "TODO", "TODO: two")]);
     }
 
     [Fact]
@@ -88,7 +79,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -104,7 +95,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -120,7 +111,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -137,10 +128,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "FIXME", "FIXME: fix this"),
-            Expected(1, "BUG", "BUG: handle edge case"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "FIXME", "FIXME: fix this"), Expected(1, "BUG", "BUG: handle edge case")]);
     }
 
     [Fact]
@@ -156,9 +144,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: inline comment"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: inline comment")]);
     }
 
     [Fact]
@@ -175,9 +161,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: first TODO: second"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: first TODO: second")]);
     }
 
     [Fact]
@@ -193,7 +177,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -209,7 +193,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -228,7 +212,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -244,9 +228,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: report this"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this")]);
     }
 
     [Fact]
@@ -263,9 +245,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "~ TODO: should be flagged"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "~ TODO: should be flagged")]);
     }
 
     [Fact]
@@ -288,10 +268,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: report this"),
-            Expected(1, "TODO", "TODO: but report this"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: report this"), Expected(1, "TODO", "TODO: but report this")]);
     }
 
     [Fact]
@@ -307,7 +284,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -323,9 +300,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(
-            text,
-            Expected(0, "TODO", "TODO: flagged"));
+        await VerifyAnalyzerAsync(text, [Expected(0, "TODO", "TODO: flagged")]);
     }
 
         [Fact]
@@ -341,6 +316,6 @@ class C
 }
 ";
 
-            await Verifier.VerifyAnalyzerAsync(text);
+            await VerifyAnalyzerAsync(text);
         }
 }

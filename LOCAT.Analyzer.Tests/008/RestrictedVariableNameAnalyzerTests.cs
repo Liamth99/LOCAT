@@ -1,19 +1,17 @@
 ﻿using System.Threading.Tasks;
 using LOCAT.Analyzer._008;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 
 namespace LOCAT.Analyzer.Tests._008;
 
-public class RestrictedVariableNameTests
+public class RestrictedVariableNameTests : LocatVerifierBase<RestrictedVariableNameAnalyzer>
 {
-    private class MyAnalyzerTest : CSharpAnalyzerTest<RestrictedVariableNameAnalyzer, DefaultVerifier>;
-
     private static readonly DiagnosticResult Expected =
         new DiagnosticResult("LOCAT008", DiagnosticSeverity.Warning)
            .WithMessageFormat("Variable name '{0}' violates naming restrictions for class '{1}' whose regex restrictions are {2}");
+
 
    [Fact]
     public async Task SingleCharacterVariable_MatchesRestriction_IsFlagged()
@@ -32,15 +30,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -60,14 +51,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -81,15 +66,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -101,15 +79,8 @@ class C
     public int {|#0:p|#0} { get; set; }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("p", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("p", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -121,15 +92,8 @@ class C
     public int {|#0:f|#0};
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("f", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("f", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -148,15 +112,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("n", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("n", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -175,15 +132,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("i", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("i", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -203,15 +153,8 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("v", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("v", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -227,17 +170,11 @@ class C
     }
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(1).WithArguments("b", "Int32", "\\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(2).WithArguments("c", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(
+            text,
+            [Expected.WithLocation(0).WithArguments("a", "Int32", "\\b[a-z]\\b"), Expected.WithLocation(1).WithArguments("b", "Int32", "\\b[a-z]\\b"), Expected.WithLocation(2).WithArguments("c", "Int32", "\\b[a-z]\\b")],
+            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = \\b[a-z]\\b");
     }
 
     [Fact]
@@ -250,16 +187,11 @@ class C
     int {|#1:Y|#1};
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.default = (?i)[xy]"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("X", "Int32", "(?i)[xy]"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(1).WithArguments("Y", "Int32", "(?i)[xy]"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(
+            text,
+            [Expected.WithLocation(1).WithArguments("Y", "Int32", "(?i)[xy]"), Expected.WithLocation(0).WithArguments("X", "Int32", "(?i)[xy]")],
+            editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.default = (?i)[xy]");
     }
 
     [Fact]
@@ -272,14 +204,8 @@ class C
     string s;
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -292,14 +218,7 @@ class C
     string s;
 }
 ";
-        var test = new MyAnalyzerTest()
-        {
-            TestCode = text,
-        };
 
-        test.TestState.AnalyzerConfigFiles.Add(("/.editorconfig", "[*.cs]\ndotnet_diagnostic.LOCAT008.Int32 = \\b[a-z]\\b"));
-        test.ExpectedDiagnostics.Add(Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b"));
-
-        await test.RunAsync();
+        await VerifyAnalyzerAsync(text, [Expected.WithLocation(0).WithArguments("x", "Int32", "\\b[a-z]\\b")], editorConfigContent: "[*.cs]\ndotnet_diagnostic.LOCAT008.Int32 = \\b[a-z]\\b");
     }
 }

@@ -1,17 +1,21 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._001;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier =
-    Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
-        LOCAT.Analyzer._001.DebugDisplayMissingAnalyzer,
-        LOCAT.Analyzer._001.AddDebugDisplayFixProvider,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._001;
 
-public class DebugDisplayFixTests
+public class DebugDisplayFixTests: LocatVerifierBase<DebugDisplayMissingAnalyzer, AddDebugDisplayFixProvider>
 {
+    DiagnosticResult Expected(int location, string argument)
+    {
+        return new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
+              .WithLocation(location)
+              .WithMessageFormat("'{0}' should have a DebugDisplay")
+              .WithArguments(argument);
+    }
+
      [Fact]
     public async Task FixAddsDisplayAttribute()
     {
@@ -38,14 +42,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                   .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                   .WithArguments("TestClass")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -77,14 +74,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                        .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                        .WithArguments("TestClass")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -119,14 +109,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                   .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                   .WithArguments("TestClass")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -160,14 +143,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                   .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                   .WithArguments("TestClass")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
     }
 
     [Fact]
@@ -207,17 +183,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                        .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                        .WithArguments("TestClass"),
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                       .WithLocation(1, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                       .WithArguments("TestClass2")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass"), Expected(1, "TestClass2")]);
     }
 
     [Fact]
@@ -258,14 +224,7 @@ namespace Company.Models
     }
 }";
 
-        // Verify the code fix
-        await Verifier.VerifyCodeFixAsync(testCode,
-            [
-                new DiagnosticResult("LOCAT001", DiagnosticSeverity.Warning)
-                   .WithLocation(1, DiagnosticLocationOptions.InterpretAsMarkupKey)
-                   .WithArguments("TestClass2")
-            ],
-            fixedCode);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(1, "TestClass2")]);
     }
 
     [Fact]
@@ -284,11 +243,7 @@ namespace Company.Models
             }
         }";
 
-        // Expected code (should remain unchanged because the attribute already exists)
-        const string fixedCode = testCode;
-
-        // Verify that no additional attribute is added
-        await Verifier.VerifyCodeFixAsync(testCode, fixedCode);
+        await VerifyAnalyzerAsync(testCode);
     }
 
     [Fact]
@@ -304,10 +259,6 @@ namespace Company.Models
             }
         }";
 
-        // Expected code (should remain unchanged because the attribute already exists)
-        const string fixedCode = testCode;
-
-        // Verify that no additional attribute is added
-        await Verifier.VerifyCodeFixAsync(testCode, fixedCode);
+        await VerifyAnalyzerAsync(testCode);
     }
 }

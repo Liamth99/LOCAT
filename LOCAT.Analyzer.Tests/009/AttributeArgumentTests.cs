@@ -1,16 +1,13 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._009;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
-    LOCAT.Analyzer._009.OptionalParameterNamedArgumentAnalyzer,
-    LOCAT.Analyzer._009.OptionalParameterNamedArgumentCodeFix,
-    Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 
 namespace LOCAT.Analyzer.Tests._009;
 
-public class AttributeArgumentTests
+public class AttributeArgumentTests : LocatVerifierBase<OptionalParameterNamedArgumentAnalyzer, OptionalParameterNamedArgumentCodeFix>
 {
     DiagnosticResult Expected(int location, string name)
     {
@@ -55,10 +52,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyCodeFixAsync(
-            text,
-            Expected(location: 0, "name"),
-            fix);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "name")]);
     }
 
     [Fact]
@@ -80,7 +74,7 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
 }

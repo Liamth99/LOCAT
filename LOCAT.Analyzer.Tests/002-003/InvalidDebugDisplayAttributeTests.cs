@@ -1,16 +1,27 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._002_003;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier =
-    Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerVerifier<
-        LOCAT.Analyzer._002_003.InvalidDebugDisplayAnalyzer,
-        Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._002_003;
 
-public class InvalidDebugDisplayAttributeTests
+public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugDisplayAnalyzer>
 {
+    DiagnosticResult Expected2(int location)
+    {
+        return new DiagnosticResult("LOCAT002", DiagnosticSeverity.Error)
+              .WithLocation(location)
+              .WithMessageFormat("Debug Displays Should not be empty");
+    }
+
+    DiagnosticResult Expected3(int location)
+    {
+        return new DiagnosticResult("LOCAT003", DiagnosticSeverity.Warning)
+              .WithLocation(location)
+              .WithMessageFormat("Debug Displays Should contain member data");
+    }
+
     [Fact]
     public async Task ValueIsEmpty_AlertDiagnostic()
     {
@@ -19,11 +30,7 @@ public class InvalidDebugDisplayAttributeTests
                             public class Class1{}
                             ";
 
-        var expected = new DiagnosticResult("LOCAT002", DiagnosticSeverity.Error)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should not be empty");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await VerifyAnalyzerAsync(text, [Expected2(0)]);
     }
 
     [Fact]
@@ -33,11 +40,7 @@ public class InvalidDebugDisplayAttributeTests
                             [DebuggerDisplay({|#0:""     ""|#0})]
                             public class Class1{}";
 
-        var expected = new DiagnosticResult("LOCAT002", DiagnosticSeverity.Error)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should not be empty");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await VerifyAnalyzerAsync(text, [Expected2(0)]);
     }
 
     [Fact]
@@ -50,11 +53,7 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        var expected = new DiagnosticResult("LOCAT003", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should contain member data");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await VerifyAnalyzerAsync(text, [Expected3(0)]);
     }
 
     [Fact]
@@ -67,11 +66,7 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        var expected = new DiagnosticResult("LOCAT003", DiagnosticSeverity.Warning)
-            .WithLocation(0, DiagnosticLocationOptions.InterpretAsMarkupKey)
-            .WithMessageFormat("Debug Displays Should contain member data");
-
-        await Verifier.VerifyAnalyzerAsync(text, expected);
+        await VerifyAnalyzerAsync(text, [Expected3(0)]);
     }
 
     [Fact]
@@ -84,6 +79,6 @@ public class InvalidDebugDisplayAttributeTests
                                 public int Id { get; set; }
                             };";
 
-        await Verifier.VerifyAnalyzerAsync(text, []);
+        await VerifyAnalyzerAsync(text);
     }
 }

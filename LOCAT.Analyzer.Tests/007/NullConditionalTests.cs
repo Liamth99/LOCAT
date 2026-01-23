@@ -35,7 +35,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -67,7 +67,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     // ===================================================================
@@ -87,7 +87,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -104,7 +104,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
     }";
         await Verifier.VerifyAnalyzerAsync(text);
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     // ===================================================================
@@ -140,7 +140,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -157,7 +157,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
     }";
         await Verifier.VerifyAnalyzerAsync(text);
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -173,7 +173,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     // ===================================================================
@@ -194,7 +194,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -210,7 +210,7 @@ public class NullConditionalTests : LocatVerifierBase<NullConditionalAnalyzer>
         }
     }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
 

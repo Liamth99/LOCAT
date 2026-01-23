@@ -22,7 +22,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "null")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "null")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "0")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "0")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "\"test\"")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -61,7 +61,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "'c'")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "'c'")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "true")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "true")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -90,7 +90,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test);
+        await VerifyAnalyzerAsync(test, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -105,7 +105,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "E.A")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -119,7 +119,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Max")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Max")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -133,7 +133,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Y")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "Y")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -146,7 +146,7 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "-5")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "-5")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -161,6 +161,6 @@ class C {
     }
 }";
 
-        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")]);
+        await VerifyAnalyzerAsync(test, [Expected.WithLocation(0).WithArguments("is", "==", "N.Color.Blue")], cancellationToken: TestContext.Current.CancellationToken);
     }
 }

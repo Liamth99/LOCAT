@@ -43,7 +43,7 @@ class C
 }
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "x")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "x")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -73,7 +73,7 @@ class C
 }
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "b")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "b")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -92,7 +92,7 @@ class C
 ";
 
         // No fix expected
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -122,7 +122,7 @@ class C
 }
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "a"), Expected(location: 1, "b"), Expected(location: 2, "c")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "a"), Expected(location: 1, "b"), Expected(location: 2, "c")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -152,6 +152,6 @@ class C
 }
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "a"), Expected(location: 1, "c")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(location: 0, "a"), Expected(location: 1, "c")], cancellationToken: TestContext.Current.CancellationToken);
     }
 }

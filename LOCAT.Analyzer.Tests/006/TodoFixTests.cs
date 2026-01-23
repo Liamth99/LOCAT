@@ -27,7 +27,7 @@ public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 //~ TODO: fix this
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: fix this")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: fix this")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 /*~ TODO: improve logic */
 ";
 
-        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: improve logic")]);
+        await VerifyCodeFixAsync(text, fix, [Expected(0, "TODO", "TODO: improve logic")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 //~ TODO: already ignored
 ";
 
-            await VerifyAnalyzerAsync(text);
+            await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 //~ fixme: handle error
 ";
 
-            await VerifyCodeFixAsync(text, fix, [Expected(0, "fixme", "fixme: handle error")]);
+            await VerifyCodeFixAsync(text, fix, [Expected(0, "fixme", "fixme: handle error")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -79,6 +79,6 @@ public class TodoFixTests : LocatVerifierBase<TodoAnalyzer, SuppressTodoFix>
 /*~ bug: issue here */
 ";
 
-            await VerifyCodeFixAsync(text, fix, [Expected(0, "bug", "bug: issue here")]);
+            await VerifyCodeFixAsync(text, fix, [Expected(0, "bug", "bug: issue here")], cancellationToken: TestContext.Current.CancellationToken);
     }
 }

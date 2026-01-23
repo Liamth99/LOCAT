@@ -42,7 +42,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -109,7 +109,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -143,7 +143,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -183,7 +183,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass"), Expected(1, "TestClass2")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(0, "TestClass"), Expected(1, "TestClass2")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -224,7 +224,7 @@ namespace Company.Models
     }
 }";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(1, "TestClass2")]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected(1, "TestClass2")], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -243,7 +243,7 @@ namespace Company.Models
             }
         }";
 
-        await VerifyAnalyzerAsync(testCode);
+        await VerifyAnalyzerAsync(testCode, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -259,6 +259,6 @@ namespace Company.Models
             }
         }";
 
-        await VerifyAnalyzerAsync(testCode);
+        await VerifyAnalyzerAsync(testCode, cancellationToken: TestContext.Current.CancellationToken);
     }
 }

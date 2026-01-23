@@ -27,7 +27,7 @@ public class Program
     }
 }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
     
     [Fact]
@@ -49,7 +49,7 @@ public class TestClass
     }
 }";
 
-        await VerifyAnalyzerAsync(text, [Expected]);
+        await VerifyAnalyzerAsync(text, [Expected], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class TestClass
 ";
 
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -128,6 +128,6 @@ public class TestClass2 : TestClass
 }
 ";
 
-        await VerifyCodeFixAsync(testCode, fixedCode, [Expected]);
+        await VerifyCodeFixAsync(testCode, fixedCode, [Expected], cancellationToken: TestContext.Current.CancellationToken);
     }
 }

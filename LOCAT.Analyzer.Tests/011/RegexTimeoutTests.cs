@@ -29,7 +29,7 @@ class C
     }
 }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -47,7 +47,7 @@ class C
     }
 }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -64,7 +64,7 @@ class C
     }
 }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ class C
     }
 }";
 
-        await VerifyAnalyzerAsync(text, []);
+        await VerifyAnalyzerAsync(text, [], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -97,7 +97,7 @@ partial class C
     private static partial Regex R() => null!;
 }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -114,7 +114,7 @@ partial class C
     private static partial Regex R() => null!;
 }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -130,7 +130,7 @@ partial class C
     private static partial Regex R() => null!;
 }";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -147,7 +147,7 @@ class C
     }
 }";
 
-        await VerifyAnalyzerAsync(text, [Expected(0)]);
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
 }

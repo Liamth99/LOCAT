@@ -30,7 +30,7 @@ public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugD
                             public class Class1{}
                             ";
 
-        await VerifyAnalyzerAsync(text, [Expected2(0)]);
+        await VerifyAnalyzerAsync(text, [Expected2(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugD
                             [DebuggerDisplay({|#0:""     ""|#0})]
                             public class Class1{}";
 
-        await VerifyAnalyzerAsync(text, [Expected2(0)]);
+        await VerifyAnalyzerAsync(text, [Expected2(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugD
                                 public int Id { get; set; }
                             };";
 
-        await VerifyAnalyzerAsync(text, [Expected3(0)]);
+        await VerifyAnalyzerAsync(text, [Expected3(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugD
                                 public int Id { get; set; }
                             };";
 
-        await VerifyAnalyzerAsync(text, [Expected3(0)]);
+        await VerifyAnalyzerAsync(text, [Expected3(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -79,6 +79,6 @@ public class InvalidDebugDisplayAttributeTests : LocatVerifierBase<InvalidDebugD
                                 public int Id { get; set; }
                             };";
 
-        await VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
 }

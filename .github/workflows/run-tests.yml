@@ -1,9 +1,8 @@
-﻿name: run-tests.yml
-on:
+﻿on:
   pull_request:
 
 jobs:
-  build:
+  run-tests:
     runs-on: windows-latest
     timeout-minutes: 15
     steps:

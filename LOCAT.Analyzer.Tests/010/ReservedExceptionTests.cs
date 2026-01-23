@@ -1,14 +1,12 @@
 ﻿using System.Threading.Tasks;
+using LOCAT.Analyzer._010;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
-using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpAnalyzerVerifier<
-    LOCAT.Analyzer._010.DoNotUseReservedExceptionsAnalyzer,
-    Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace LOCAT.Analyzer.Tests._010;
 
-public class ReservedExceptionTests
+public class ReservedExceptionTests : LocatVerifierBase<DoNotUseReservedExceptionsAnalyzer>
 {
     DiagnosticResult Expected(int location, string name)
     {
@@ -49,7 +47,7 @@ class C
 }}
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text, Expected(0, shortName));
+        await VerifyAnalyzerAsync(text, [Expected(0, shortName)]);
     }
 
     [Theory]
@@ -71,7 +69,7 @@ class C
 }}
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 
     [Fact]
@@ -93,6 +91,6 @@ class C
 }
 ";
 
-        await Verifier.VerifyAnalyzerAsync(text);
+        await VerifyAnalyzerAsync(text);
     }
 }

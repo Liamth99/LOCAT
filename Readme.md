@@ -1,7 +1,8 @@
 # LOCAT 
-![NuGet Version](https://img.shields.io/nuget/v/LOCAT.svg)
-![NuGet Downloads](https://img.shields.io/nuget/dt/LOCAT.svg)
-![GitHub Release](https://img.shields.io/github/v/release/Liamth99/LOCAT)
+![NuGet Version](https://img.shields.io/nuget/v/LOCAT.svg?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FLOCAT%2F)
+![NuGet Downloads](https://img.shields.io/nuget/dt/LOCAT?link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FLOCAT%2F)
+![GitHub Release](https://img.shields.io/github/v/release/Liamth99/LOCAT?link=https%3A%2F%2Fgithub.com%2FLiamth99%2FLOCAT%2Freleases)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/Liamth99/LOCAT?link=https%3A%2F%2Fgithub.com%2FLiamth99%2FLOCAT%2Fissues)
 ![License](https://img.shields.io/github/license/Liamth99/LOCAT)
 
 ### (Liam's Obsessive Code Analysis Tool) 

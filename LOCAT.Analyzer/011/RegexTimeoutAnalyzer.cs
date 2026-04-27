@@ -29,12 +29,13 @@ public class RegexTimeoutAnalyzer : DiagnosticAnalyzer
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
         context.RegisterSyntaxNodeAction(AnalyzeRegexCreation, SyntaxKind.ObjectCreationExpression);
+        context.RegisterSyntaxNodeAction(AnalyzeRegexCreation, SyntaxKind.ImplicitObjectCreationExpression);
         context.RegisterSyntaxNodeAction(AnalyzeGeneratedRegexAttribute, SyntaxKind.Attribute);
     }
 
     private static void AnalyzeRegexCreation(SyntaxNodeAnalysisContext context)
     {
-        var creation = (ObjectCreationExpressionSyntax)context.Node;
+        var creation = (BaseObjectCreationExpressionSyntax)context.Node;
 
         if (context.SemanticModel.GetSymbolInfo(creation).Symbol is not IMethodSymbol ctor)
             return;

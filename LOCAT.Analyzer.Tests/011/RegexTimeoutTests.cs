@@ -32,6 +32,24 @@ class C
         await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
     }
 
+    // Fixes https://github.com/Liamth99/LOCAT/issues/29
+    [Fact]
+    public async Task Warn_OnRegexCreationWithoutTimeoutOrNonBacktracking_ImplicitAssignment()
+    {
+        const string text = @"
+using System.Text.RegularExpressions;
+
+class C
+{
+    void M()
+    {
+        Regex r = {|#0:new (""abc"")|};
+    }
+}";
+
+        await VerifyAnalyzerAsync(text, [Expected(0)], cancellationToken: TestContext.Current.CancellationToken);
+    }
+
     [Fact]
     public async Task NoWarn_WhenRegexTimeoutProvided()
     {

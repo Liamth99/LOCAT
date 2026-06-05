@@ -79,7 +79,7 @@ Note: added the ability to configure the regex used to capture comments in v1.2.
 
 ``` ini
 [*.cs]
-dotnet_diagnostic.LOCAT006.todo_regex = \b(todo|fixme|bug|temp)\b
+dotnet_diagnostic.LOCAT006.todo_regex = \b(todo|fixme|fix|bug|temp|tmp)\b
 ```
 
 ## V1.2.0 release

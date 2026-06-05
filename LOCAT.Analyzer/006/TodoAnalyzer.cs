@@ -51,7 +51,7 @@ public class TodoAnalyzer : DiagnosticAnalyzer
 
             config.GetOptions(context.Tree).TryGetValue("dotnet_diagnostic.LOCAT006.todo_regex", out var configValue);
 
-            var todoRegex = new Regex(configValue ?? @"\b(todo|fixme|bug|temp)\b", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(500));
+            var todoRegex = new Regex(configValue ?? @"\b(todo|fixme|fix|bug|temp|tmp)\b", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(500));
 
             var match = todoRegex.Match(trivia.ToString());
 

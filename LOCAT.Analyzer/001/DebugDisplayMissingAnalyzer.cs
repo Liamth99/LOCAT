@@ -47,6 +47,10 @@ public class DebugDisplayMissingAnalyzer : DiagnosticAnalyzer
         if(classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.AbstractKeyword)))
             return;
 
+        // Ignore static classes
+        if(classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.StaticKeyword)))
+            return;
+
         var name = Utils.GetNamespaceOfClass(classDeclaration);
 
         if (name is null || !_modelsRegex.IsMatch(name))

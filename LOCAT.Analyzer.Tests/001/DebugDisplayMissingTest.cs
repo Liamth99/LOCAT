@@ -101,4 +101,19 @@ public class DebugDisplayMissingTest : LocatVerifierBase<DebugDisplayMissingAnal
 
         await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
     }
+
+    [Fact]
+    public async Task IgnoreStaticClass()
+    {
+        const string text = @"
+                            namespace Company.Models
+                            {
+                            public static class Class1
+                            {
+                            }
+                            }
+                            ";
+
+        await VerifyAnalyzerAsync(text, cancellationToken: TestContext.Current.CancellationToken);
+    }
 }
